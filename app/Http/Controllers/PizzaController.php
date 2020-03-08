@@ -2,6 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\DetallePizza;
+use App\Http\Requests\PizzaRequest;
+use App\Ingredient;
+use App\Pizza;
 use Illuminate\Http\Request;
 
 class PizzaController extends Controller
@@ -11,9 +15,29 @@ class PizzaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function list(Request $request){
+       $pizzas = Pizza::orderby('id','DESC')
+                        ->with('ingredients')
+                        ->paginate(5);
+        $ingredients = Ingredient::all();
+
+        //dd($pizzas);
+        return [
+            'pagination' => [
+                'total'         => $pizzas->total(),
+                'current_page'  => $pizzas->currentPage(),
+                'per_page'      => $pizzas->perPage(),
+                'last_page'     => $pizzas->lastPage(),
+                'from'          => $pizzas->firstItem(),
+                'to'            => $pizzas->lastItem(),
+            ],
+            'pizzas' => $pizzas,
+            'ingredients' => $ingredients
+        ];
+    }
     public function index()
     {
-        //
+        return view('pizzas.index');
     }
 
     /**
@@ -23,7 +47,7 @@ class PizzaController extends Controller
      */
     public function create()
     {
-        //
+        return view('pizzas.index');
     }
 
     /**
@@ -32,9 +56,15 @@ class PizzaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(PizzaRequest $request)
     {
-        //
+        $pizza = new Pizza;
+        $pizza->name_pizza = $request->name_pizza;
+        $pizza->price = $request->price;
+        $pizza->save();
+        $pizza->ingredients()->sync($request->ingredients);
+
+
     }
 
     /**
@@ -66,9 +96,14 @@ class PizzaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(PizzaRequest $request, $id)
     {
-        //
+        $pizza = Pizza::findOrFail($id);
+        $pizza->name_pizza = $request->name_pizza;
+        $pizza->price = $request->price;
+        $pizza->save();
+        $pizza->ingredients()->sync($request->ingredients);
+        return response()->json(['respuesta'=>'Pizza Modificada con éxito']);
     }
 
     /**

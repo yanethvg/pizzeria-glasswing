@@ -117,8 +117,7 @@ new Vue({
             this.errors={};
 
           $("#edit").modal('show');
-        }
-        ,
+        },
         updateIngredient: function(){
             this.errors={};
             let url='update/'+this.fillIngredient.id;

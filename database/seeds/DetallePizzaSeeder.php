@@ -111,8 +111,9 @@ class DetallePizzaSeeder extends Seeder
         DetallePizza::create(
             [
                 'ingredient_id' => 5,
-                'pizza_id' => 4
+                'pizza_id' => 6
             ]
         );
+
     }
 }

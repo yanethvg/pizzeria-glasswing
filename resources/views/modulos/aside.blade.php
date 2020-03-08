@@ -9,7 +9,7 @@
 <li><a class="app-menu__item {{isActive('home')}} " href="{{route('home')}}">
     <img src="{{ asset('images/home.svg') }}" alt="" width="25px"> &nbsp;
     <span class="app-menu__label">Home</span></a></li>
-<li><a class="app-menu__item " href="">
+<li><a class="app-menu__item {{isActive('pizzas')}}" href="{{route('pizzas.index')}}">
     <img src="{{ asset('images/pizza2.svg') }}" alt="" width="25px">&nbsp;
     <span class="app-menu__label">Pizzas</span></a></li>
 <li><a class="app-menu__item {{isActive('ingredients')}}" href="{{route('ingredients.index')}}">
