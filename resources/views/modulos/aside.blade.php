@@ -6,11 +6,13 @@
 </div>
 </div>
 <ul class="app-menu">
-<li><a class="app-menu__item {{isActive('home')}} " href="{{route('home')}}"><i class="app-menu__icon fa fa-home fa-lg"></i><span class="app-menu__label">Home</span></a></li>
+<li><a class="app-menu__item {{isActive('home')}} " href="{{route('home')}}">
+    <img src="{{ asset('images/home.svg') }}" alt="" width="25px"> &nbsp;
+    <span class="app-menu__label">Home</span></a></li>
 <li><a class="app-menu__item " href="">
-<i class="app-menu__icon fa fa-plus-square"></i>
-<span class="app-menu__label">Pizzas</span></a></li>
-<li><a class="app-menu__item " href="">
-    <i class="app-menu__icon fa fa-users"></i>
+    <img src="{{ asset('images/pizza2.svg') }}" alt="" width="25px">&nbsp;
+    <span class="app-menu__label">Pizzas</span></a></li>
+<li><a class="app-menu__item {{isActive('ingredients')}}" href="{{route('ingredients.index')}}">
+    <img src="{{ asset('images/cheese.svg') }}" alt="" width="25px"> &nbsp;
     <span class="app-menu__label">Ingredientes</span></a></li>
 </ul>

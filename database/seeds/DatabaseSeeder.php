@@ -1,5 +1,6 @@
 <?php
 
+
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -13,5 +14,7 @@ class DatabaseSeeder extends Seeder
     {
         $this->call(UserSeeder::class);
         $this->call(IngredientsSeeder::class);
+        $this->call(PizzasSeeder::class);
+        $this->call(DetallePizzaSeeder::class);
     }
 }

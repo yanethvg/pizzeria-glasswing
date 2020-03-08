@@ -50,7 +50,7 @@ class IngredientsSeeder extends Seeder
             );
         Ingredient::create(
             [
-                'name_ingredient' => 'Queso',
+                'name_ingredient' => 'Extra Queso',
                 'price' => 2.50
             ]
             );
@@ -64,6 +64,24 @@ class IngredientsSeeder extends Seeder
             [
                 'name_ingredient' => 'Jamón',
                 'price' => 1.10
+            ]
+            );
+        Ingredient::create(
+            [
+                'name_ingredient' => 'Carne de Res',
+                'price' => 1.10
+            ]
+            );
+        Ingredient::create(
+            [
+                'name_ingredient' => 'Cebolla Morada',
+                'price' => 0.50
+            ]
+            );
+        Ingredient::create(
+            [
+                'name_ingredient' => 'Tomate',
+                'price' => 1.20
             ]
             );
     }

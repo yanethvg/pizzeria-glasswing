@@ -12,6 +12,41 @@ class PizzasSeeder extends Seeder
      */
     public function run()
     {
-
+        Pizza::create(
+            [
+                'name_pizza' => 'Pizza de Jamón',
+                'price' => 5.50
+            ]
+        );
+        Pizza::create(
+            [
+                'name_pizza' => 'Pizza de Pepperoni',
+                'price' => 5.50
+            ]
+        );
+        Pizza::create(
+            [
+                'name_pizza' => 'Suprema',
+                'price' => 7.50
+            ]
+        );
+        Pizza::create(
+            [
+                'name_pizza' => 'Hawaina Suprema',
+                'price' => 7.50
+            ]
+        );
+        Pizza::create(
+            [
+                'name_pizza' => 'Grand Cheese',
+                'price' => 6.99
+            ]
+        );
+        Pizza::create(
+            [
+                'name_pizza' => 'Vegetariana',
+                'price' => 6.99
+            ]
+        );
     }
 }

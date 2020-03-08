@@ -23,7 +23,7 @@ Home Glasswing
 </div>
 <div class="tile">
     <div class="tile-body">
-           Hola
+        Bienvenido a su Cuenta {{ Auth::user()->name }}
     </div>
 </div>
 @endsection

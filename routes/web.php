@@ -18,3 +18,13 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::group(['middleware'=>'auth','prefix' => 'ingredients'], function () {
+    Route::get('/', 'IngredientController@index')->name('ingredients.index');
+    Route::get('/list','IngredientController@list')->name('ingredients.list');
+    Route::get('/create', 'IngredientController@create')->name('ingredients.create');
+    Route::post('/', 'IngredientController@store')->name('ingredients.store');
+    Route::get('/{id}/edit', 'IngredientController@edit')->name('ingredients.edit');
+    Route::put('/update/{id}','IngredientController@update')->name('ingredients.update');
+    Route::get('/{id}','IngredientController@show')->name('ingredients.show');
+});
+
