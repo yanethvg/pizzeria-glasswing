@@ -32,7 +32,7 @@ new Vue({
     filters:{
         toTable: function(value){
             if(!value)
-                return 'https://via.placeholder.com/80'
+                return 'https://res.cloudinary.com/dgi2nmgsy/image/upload/w_80,h_80,c_scale/v1583768036/d43c12cc0053b2636250ba55d5c9d805_th9kkn.jpg'
             return value.toString().replace('upload/','upload/w_80,h_80,c_scale/')
         }
     },

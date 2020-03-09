@@ -104,6 +104,22 @@
     </div>
 
     <div id="lista-cursos" class="container">
+        <div class="row" style="margin-top:20px">
+            <div class="one-third column">&nbsp;</div>
+            <div class="one-third column">
+                <div class="card"  >
+                    <img src="https://irecetasfaciles.com/wp-content/uploads/2019/01/pizza-con-salami-chorizo-beacon.jpg" class="imagen-curso u-full-width">
+                    <div class="info-card">
+                        <h4>Personalize su pizza</h4>
+                        <p>Precio: <span class="u-pull-right ">$$$</span></p>
+                        <a href="#" class="u-full-width button button-custom-agregar input" data-id="1">Crear Pizza</a>
+                    </div>
+                </div>
+           </div>
+           <div class="one-third column">&nbsp;</div>
+        </div>
+
+
         <h1 id="encabezado" class="encabezado">Pizzas Disponibles</h1>
         <div class="row" v-for="pizzaSlice in pizzasSlice" >
             <div class="four columns"  v-for="pizza in pizzaSlice">
@@ -113,6 +129,7 @@
                         <h4>@{{ pizza.name_pizza}}</h4>
                         <p>Precio: <span class="u-pull-right ">$ @{{ pizza.price }}</span></p>
                         <a href="#" class="u-full-width button button-custom input agregar-carrito" data-id="1">Agregar Al Carrito</a>
+                        <a href="#" class="u-full-width button button-custom-agregar input" data-id="1">Agregar Ingredientes</a>
                     </div>
                 </div> <!--.card-->
            </div>

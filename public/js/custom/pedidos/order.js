@@ -21,7 +21,7 @@ new Vue({
     filters:{
         toTable: function(value){
             if(!value)
-                return 'https://i.pinimg.com/564x/27/47/81/2747815cc4a7c1258da3f330d71bef8d.jpg'
+                return 'https://res.cloudinary.com/dgi2nmgsy/image/upload/w_468,h_351,c_scale/v1583767799/2747815cc4a7c1258da3f330d71bef8d_bvvree.jpg'
             return value.toString().replace('upload/','upload/w_468,h_351,c_scale/')
         }
     },

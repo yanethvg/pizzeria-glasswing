@@ -35,7 +35,7 @@ new Vue({
     filters:{
         toTable: function(value){
             if(!value)
-                return 'https://via.placeholder.com/80'
+                return 'https://res.cloudinary.com/dgi2nmgsy/image/upload/w_80,h_80,c_scale/v1583767799/2747815cc4a7c1258da3f330d71bef8d_bvvree.jpg'
             return value.toString().replace('upload/','upload/w_80,h_80,c_scale/')
         }
     },

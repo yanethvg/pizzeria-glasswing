@@ -131,14 +131,26 @@ ul {
 }
 
 .button-custom {
-    background-color: red;
-    border-color: red;
-    color: white;
+    background-color: white;
+    border-color: #c4421d;
+    color: #c4421d;
 }
 
 .button-custom:hover {
     background-color: #c4421d;
-    border-color: #c4421d;
+    border-color: white;
+    color: white;
+}
+
+.button-custom-agregar {
+    background-color: white;
+    border-color: orange;
+    color: orangered;
+}
+
+.button-custom-agregar:hover {
+    background-color: orangered;
+    border-color: orange;
     color: white;
 }
 
