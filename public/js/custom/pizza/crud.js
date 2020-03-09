@@ -7,6 +7,7 @@ new Vue({
     },
     data:{
         pizzas:[],
+        image: '',
         ingredients:[],
         pagination: {
             'total': 0,
@@ -19,16 +20,26 @@ new Vue({
         newPizza: {
             'name_pizza':null,
             'price':null,
-            'ingredients':[]
+            'ingredients':[],
+            'file':null
         },
         fillPizza:{
             'name_pizza':null,
             'price':null,
-            'ingredients': []
+            'ingredients': [],
+            'file':null
         },
         errors:{},
         offset:2,
     },
+    filters:{
+        toTable: function(value){
+            if(!value)
+                return 'https://via.placeholder.com/80'
+            return value.toString().replace('upload/','upload/w_80,h_80,c_scale/')
+        }
+    },
+
     computed: {
 		isActived: function() {
 			return this.pagination.current_page;
@@ -63,7 +74,6 @@ new Vue({
             axios.get(url).then(response=> {
                 this.pizzas=response.data.pizzas.data;
                 this.ingredients = response.data.ingredients;
-                console.log(this.ingredients);
                 this.pagination=response.data.pagination;
             });
         },
@@ -78,6 +88,7 @@ new Vue({
         createPizza: function() {
             let url = '';
             this.newPizza.ingredients=this.newPizza.ingredients.map( el => el.id)
+            this.newPizza.file =this.image;
             axios.post(url, this.newPizza)
                 .then(response => {
                     this.getPizzas();
@@ -91,8 +102,10 @@ new Vue({
                     this.newPizza=  {
                         'name_pizza':null,
                         'price':null,
-                        'ingredients':[]
+                        'ingredients':[],
+                        'file':null
                     } ;
+                    this.image = null;
 
 			    }).catch(error => {
                     console.log(error);
@@ -114,9 +127,10 @@ new Vue({
                 'id':pizza.id,
                 'name_pizza':pizza.name_pizza,
                 'price':pizza.price,
-                'ingredients': pizza.ingredients
+                'ingredients': pizza.ingredients,
+                'file':pizza.img
             }
-
+            this.image = pizza.img;
             this.errors={};
 
           $("#edit").modal('show');
@@ -125,6 +139,7 @@ new Vue({
             this.errors={};
             let url='pizzas/update/'+this.fillPizza.id;
             this.fillPizza.ingredients=this.fillPizza.ingredients.map( el => el.id)
+            this.fillPizza.file =this.image;
             axios.put(url, this.fillPizza ).then((response)=>{
                 this.getPizzas();
                 this.errors = {};
@@ -135,6 +150,24 @@ new Vue({
             .catch((error)=>{
                 this.errors=error.response.data.errors
             });
+        },
+        onFileChange (e) {
+            var files = e.target.files || e.dataTransfer.files
+            if (!files.length) return
+            this.createImage(files[0])
+        },
+        createImage (file) {
+            var image = new Image()
+            var reader = new FileReader()
+            var vm = this
+
+            reader.onload = e => {
+                vm.image = e.target.result
+            }
+            reader.readAsDataURL(file)
+        },
+        removeImage: function (e) {
+            this.image = ''
         }
 
     }

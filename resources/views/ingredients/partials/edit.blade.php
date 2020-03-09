@@ -18,10 +18,15 @@
                         <label class="control-label">Precio de Ingrediente</label>
                         <input :class="['form-control', errors.price ? 'is-invalid' : '']" type="number" step="0.01" v-model="fillIngredient.price" name="price" placeholder="Ingrese Precio ">
                         <div v-if='errors.price' class="form-control-feedback text-danger">@{{ errors.price[0] }}</div>
-
                     </div>
-
-
+                    <div v-if="!image">
+                        <h3>Select an image</h3>
+                        <input type="file" @change="onFileChange">
+                      </div>
+                      <div v-else>
+                        <img :src="image" class="img-file" />
+                        <button @click="removeImage">Remove image</button>
+                      </div>
 
                 <div class="modal-footer">
                   <button class="btn btn-primary" type="submit">Actualizar</button>

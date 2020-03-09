@@ -26,6 +26,7 @@ Listado de Pizzas
                 <table class="table text-center">
                     <thead>
                         <tr>
+                            <th>Imagen</th>
                             <th>Nombre </th>
                             <th>Precio</th>
                             <th>Lista de Ingredientes</th>
@@ -34,6 +35,9 @@ Listado de Pizzas
                     </thead>
                     <tbody>
                         <tr  v-for="pizza in pizzas">
+                            <td>
+                                <img v-bind:src="pizza.img | toTable" alt="">
+                            </td>
                             <td>@{{ pizza.name_pizza }}</td>
                             <td> $ @{{ pizza.price }}</td>
                             <td style="flex-wrap: wrap;width:35%">

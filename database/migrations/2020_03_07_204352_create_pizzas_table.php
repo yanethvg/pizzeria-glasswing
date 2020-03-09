@@ -17,6 +17,7 @@ class CreatePizzasTable extends Migration
             $table->increments('id');
             $table->string('name_pizza');
             $table->double('price');
+            $table->text('img')->nullable();
            // $table->timestamps();
         });
     }

@@ -40,3 +40,7 @@ Route::group(['middleware'=>'auth','prefix' => 'pizzas'], function () {
     Route::get('/{id}','PizzaController@show')->name('pizzas.show');
 });
 
+Route::group(['prefix' => 'pedidos'], function () {
+    Route::get('/list','PedidosController@list')->name('pedidos.list');
+});
+

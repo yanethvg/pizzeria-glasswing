@@ -9,17 +9,19 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('clientes/css/skeleton.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('clientes/css/custom.css') }}">
 </head>
-<body>
+<body  >
+    <div id="pizzas" v-cloak class="container-fluid">
 <header id="header" class="header">
     <div class="container">
         <div class="row">
             <div class="four columns">
-                <img src="{{ asset('clientes/img/logo.jpg') }}" id="logo">
+                <h3>Pizzeria Glasswing</h3>
             </div>
-            <div class="two columns u-pull-right ">
+            <div class="one columns u-pull-right ">
                 <ul>
                     <li class="submenu">
-                            <img src="{{ asset('clientes/img/cart.png') }}" id="img-carrito">
+                        <img src="{{ asset('clientes/img/cart.png') }}" id="img-carrito">
+
                             <div id="carrito">
                                     <table id="lista-carrito" class="u-full-width">
                                         <thead>
@@ -36,11 +38,23 @@
                             </div>
 
                     </li>
-
                 </ul>
-
-
             </div>
+            @auth
+            <div class="one columns u-pull-right">
+                <ul>
+                    <li >
+                        <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                            <img src="{{ asset('clientes/img/exit.png') }}" >
+                        </a>
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                            @csrf
+                        </form>
+
+                    </li>
+                </ul>
+            </div>
+            @endauth
         </div>
     </div>
     </header>
@@ -52,7 +66,17 @@
                     <div class="six columns">
                         <div class="contenido-hero">
                                 <h2>¿Qué desea comer?</h2>
-                                <p>Pizzeria </p>
+                                @auth
+                                <p style="color:white; margin: 1px">Revisa tus Pedidos</p>
+                                <a href="" class="button button-custom" data-id="1">Mis Pedidos</a>
+                                @else
+                                <p style="color:white; margin:1px">Para poder realizar pedidos</p>
+                                <a href="{{route('login')}}" class="button button-custom" data-id="1">Ingrese a su cuenta</a>
+                                <p style="color:white; margin:1px">Crear su cuenta</p>
+                                <a href="{{route('register')}}" class="button button-custom" data-id="1">Registrarse</a>
+
+                                @endauth
+
                         </div>
                     </div>
             </div>
@@ -81,68 +105,56 @@
 
     <div id="lista-cursos" class="container">
         <h1 id="encabezado" class="encabezado">Pizzas Disponibles</h1>
-        <div class="row">
-            <div class="four columns">
-                <div class="card">
-                    <img src="{{ asset('clientes/img/curso1.jpg') }}" class="imagen-curso u-full-width">
+        <div class="row" v-for="pizzaSlice in pizzasSlice" >
+            <div class="four columns"  v-for="pizza in pizzaSlice">
+                <div class="card"  >
+                    <img v-bind:src="pizza.img | toTable " class="imagen-curso u-full-width">
                     <div class="info-card">
-                        <h4>HTML5, CSS3, JavaScript para Principiantes</h4>
-                        <p>Juan Pedro</p>
-                        <p class="precio">$200  <span class="u-pull-right ">$15</span></p>
-                        <a href="#" class="u-full-width button-primary button input agregar-carrito" data-id="1">Agregar Al Carrito</a>
+                        <h4>@{{ pizza.name_pizza}}</h4>
+                        <p>Precio: <span class="u-pull-right ">$ @{{ pizza.price }}</span></p>
+                        <a href="#" class="u-full-width button button-custom input agregar-carrito" data-id="1">Agregar Al Carrito</a>
                     </div>
                 </div> <!--.card-->
-            </div>
-            <div class="four columns">
-                    <div class="card">
-                        <img src="{{ asset('clientes/img/curso2.jpg') }}" class="imagen-curso u-full-width">
-                        <div class="info-card">
-                            <h4>Curso de Comida Vegetariana</h4>
-                            <p>Juan Pedro</p>
-                            <p class="precio">$200  <span class="u-pull-right ">$15</span></p>
-                            <a href="#" class="u-full-width button-primary button input agregar-carrito" data-id="2">Agregar Al Carrito</a>
-                        </div>
-                    </div>
-            </div>
-            <div class="four columns">
-                    <div class="card">
-                        <img src="{{ asset('clientes/img/curso3.jpg') }}" class="imagen-curso u-full-width">
-                        <div class="info-card">
-                            <h4>Guitarra para Principiantes</h4>
-                            <p>Juan Pedro</p>
-                            <p class="precio">$200  <span class="u-pull-right ">$15</span></p>
-                            <a href="#" class="u-full-width button-primary button input agregar-carrito" data-id="3">Agregar Al Carrito</a>
-                        </div>
-                    </div> <!--.card-->
-            </div>
-
+           </div>
         </div> <!--.row-->
-
     </div>
+   <div class="container" style="margin-top:15px">
+   <div class="row">
+    <div class="one-third column">&nbsp;</div>
+        <div class="one-third column">
+            <ul class="pagination">
+                    <li v-if="pagination.current_page > 1" >
+                        <a  href="#" @click.prevent="changePage(pagination.current_page - 1)">
+                            Atras
+                        </a>
+                    </li>
 
-    <footer id="footer" class="footer">
-        <div class="container">
-            <div class="row">
-                    <div class="four columns">
-                            <nav id="principal" class="menu">
-                                <a class="enlace" href="#">Para tu Negocio</a>
-                                <a class="enlace" href="#">Conviertete en Instructor</a>
-                                <a class="enlace" href="#">Aplicaciones Móviles</a>
-                                <a class="enlace" href="#">Soporte</a>
-                                <a class="enlace" href="#">Temas</a>
-                            </nav>
-                    </div>
-                    <div class="four columns">
-                            <nav id="secundaria" class="menu">
-                                <a class="enlace" href="#">¿Quienes Somos?</a>
-                                <a class="enlace" href="#">Empleo</a>
-                                <a class="enlace" href="#">Blog</a>
-                            </nav>
-                    </div>
-            </div>
+                    <li class='page-item' v-for="page in pagesNumber">
+                        <a  href="#" @click.prevent="changePage(page)"  v-bind:class="[ page == isActived ? 'active' : '']">
+                            @{{ page }}
+                        </a>
+                    </li>
+
+                    <li v-if="pagination.current_page < pagination.last_page">
+                        <a  href="#" @click.prevent="changePage(pagination.current_page + 1)">
+                            Siguiente
+                        </a>
+                    </li>
+
+              </ul>
         </div>
-    </footer>
-    <script src="{{ asset('clientes/js/app.js') }}"></script>
+    </div>
+    <div class="one-third column">&nbsp;</div>
 
+   </div>
+   </div>
+
+
+</div>
+    <script src="{{ asset('clientes/js/app.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/axios@0.19.0/dist/axios.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <script src="{{ asset('js/custom/pedidos/order.js') }}"></script>
 </body>
 </html>

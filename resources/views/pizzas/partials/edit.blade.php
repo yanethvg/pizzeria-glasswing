@@ -24,10 +24,19 @@
                     <multiselect :class="[ errors.ingredients ? 'is-invalid' : '']"   v-model="fillPizza.ingredients" :options="ingredients" track-by="name_ingredient" label="name_ingredient" :multiple="true"></multiselect>
                     <div v-if='errors.ingredients' class="form-control-feedback text-danger">@{{ errors.ingredients[0] }}</div>
                 </div>
-            <div class="modal-footer">
-              <button class="btn btn-primary" type="submit">Actualizar</button>
-              <button class="btn btn-secondary" type="button" data-dismiss="modal">Close</button>
-            </div>
+                <div v-if="!image">
+                    <h3>Select an image</h3>
+                    <input type="file" @change="onFileChange">
+                  </div>
+                  <div v-else>
+                    <img :src="image" class="img-file" />
+                    <button @click="removeImage">Remove image</button>
+                  </div>
+
+                <div class="modal-footer">
+                <button class="btn btn-primary" type="submit">Actualizar</button>
+                <button class="btn btn-secondary" type="button" data-dismiss="modal">Close</button>
+                </div>
           </div>
         </div>
       </div>

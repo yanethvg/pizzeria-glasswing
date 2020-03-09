@@ -17,6 +17,7 @@ class CreateIngredientsTable extends Migration
             $table->bigIncrements('id');
             $table->string('name_ingredient');
             $table->double('price');
+            $table->text('img')->nullable();
             //$table->timestamps();
         });
     }

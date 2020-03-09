@@ -26,6 +26,7 @@ Listado de Ingredientes
                 <table class="table text-center">
                     <thead>
                         <tr>
+                            <th>Imagen</th>
                             <th>Nombre del Ingrediente</th>
                             <th>Precio</th>
                             <th>Acciones</th>
@@ -33,6 +34,9 @@ Listado de Ingredientes
                     </thead>
                     <tbody>
                         <tr  v-for="ingredient in ingredients">
+                            <td>
+                            <img v-bind:src="ingredient.img | toTable" alt="">
+                            </td>
                             <td>@{{ ingredient.name_ingredient }}</td>
                             <td> $ @{{ ingredient.price }}</td>
                             <td class="d-flex justify-content-center">

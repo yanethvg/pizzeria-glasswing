@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\IngredientRequest;
 use App\Ingredient;
 use Illuminate\Http\Request;
+use JD\Cloudder\Facades\Cloudder;
 
 class IngredientController extends Controller
 {
@@ -52,9 +53,18 @@ class IngredientController extends Controller
      */
     public function store(IngredientRequest $request)
     {
+        //Cloudinary
+        \Cloudinary::config(array(
+            "cloud_name" => getenv('CLOUDINARY_CLOUD_NAME'),
+            "api_key" => getenv('CLOUDINARY_API_KEY'),
+            "api_secret" => getenv('CLOUDINARY_API_SECRET')
+        ));
+
+        $file_img = \Cloudinary\Uploader::upload($request->file,  ["width" =>265, "height"=>165]);
         $ingredient = new Ingredient;
         $ingredient->name_ingredient = $request->name_ingredient;
         $ingredient->price = $request->price;
+        $ingredient->img = $file_img['url'];
         $ingredient->save();
 
         return response()->json(['ingredient'=>$ingredient->name_ingredient]);
@@ -98,9 +108,22 @@ class IngredientController extends Controller
      */
     public function update(IngredientRequest $request, $id)
     {
+
         $ingredient = Ingredient::findOrFail($id);
         $ingredient->name_ingredient = $request->name_ingredient;
         $ingredient->price = $request->price;
+        //dd($request);
+        if($ingredient->img != $request->file){
+            //Cloudinary
+            \Cloudinary::config(array(
+                "cloud_name" => getenv('CLOUDINARY_CLOUD_NAME'),
+                "api_key" => getenv('CLOUDINARY_API_KEY'),
+                "api_secret" => getenv('CLOUDINARY_API_SECRET')
+            ));
+
+            $file_img = \Cloudinary\Uploader::upload($request->file,  ["width" =>265, "height"=>165]);
+            $ingredient->img = $file_img['url'];
+        }
         $ingredient->save();
         return response()->json(['respuesta'=>'Ingrediente Modificado con éxito']);
     }
