@@ -13,7 +13,7 @@
 
 </head>
 <body  >
- <div id="confirmacion" v-cloak class="container-fluid">
+ <div id="mispedidos" v-cloak class="container-fluid">
     <header id="header" class="header">
         <div class="container">
             <div class="row">
@@ -80,8 +80,8 @@
                             <div class="contenido-hero">
                                     <h2>¿Qué desea comer?</h2>
                                     @auth
-                                    <p style="color:white; margin: 1px">Revisa tus Pedidos</p>
-                                    <a href="" class="button button-custom" data-id="1">Mis Pedidos</a>
+                                    <p style="color:white; margin: 1px">Regresar a pagina principal</p>
+                                    <a href="/" class="button button-custom" data-id="1">Home</a>
                                     @else
                                     <p style="color:white; margin:1px">Para poder realizar pedidos</p>
                                     <a href="{{route('login')}}" class="button button-custom" data-id="1">Ingrese a su cuenta</a>
@@ -117,41 +117,33 @@
         </div>
         <div class="container" style="margin-top:10px">
 
-                <h3>Confirme su orden</h3>
+                <h3>Historial ordenes</h3>
 
             <table class="u-full-width">
                 <thead>
                   <tr>
-                    <th>Nombre de la Pizza</th>
-                    <th>Precio original</th>
-                    <th>Subtotal</th>
-                    <th>Ingredientes Extra</th>
+                    <th>Fecha de orden</th>
+                    <th>Monto</th>
+                    <th>Pizzas de la orden</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr v-for="car in carrito">
-                    <td>@{{ car.name_pizza }}</td>
-                    <td>@{{car.price}}</td>
-                    <td>@{{ totalSum(car.extraIngredients,car.price) }}</td>
-                    <td v-if="car.extraIngredients">
-                       <ul v-for="ingredient in car.extraIngredients">
-                        <ol>@{{ ingredient.name_ingredient}} </ol>
+                  <tr v-for="order in orders">
+                    <td>@{{ order.created_at }}</td>
+                    <td>@{{order.amount}}</td>
+                    <td>
+                       <ul v-for="pizza in order.pizzas">
+                        <ol>@{{ pizza.name_pizza}} </ol>
+                        <ul></ul>
                        </ul>
                     </td>
-                    <td v-else>
-                        No hay Ingredientes Extra
-                    </td>
+
+
                   </tr>
                 </tbody>
-                <tfoot>
-                    <tr>
-                        <td>Total</td>
-                        <td>@{{calculateAmount()}}</td>
-                    </tr>
-                </tfoot>
+
               </table>
-              <a class="u-full-width button button-custom input agregar-carrito"  data-id="1" v-on:click.prevent="sendData">Confirmar Orden</a>
-              <a href="/" id="vaciar-carrito" class="button u-full-width" >Cancelar</a>
+              <a href="/" id="vaciar-carrito" class="button u-full-width" >Regresar</a>
         </div>
 
  </div>
@@ -162,8 +154,7 @@
     <script src="https://unpkg.com/vue-multiselect@2.1.0"></script>
     <script src="https://unpkg.com/axios@0.19.0/dist/axios.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
-    <script src="{{ asset('js/custom/pedidos/confirmacion.js') }}"></script>
+    <script src="{{ asset('js/custom/pedidos/misPedidos.js') }}"></script>
 
 </body>
 </html>
-

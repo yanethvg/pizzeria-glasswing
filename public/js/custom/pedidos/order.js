@@ -9,6 +9,14 @@ new Vue({
         carrito:[],
         pizzasSlice:[],
         ingredients:[],
+        personalizada:{
+            'id':"",
+            'name_pizza':"",
+            'price':"",
+            'ingredients': [],
+            extraIngredients:[],
+            'img':""
+        },
         total:null,
         extraIngredientsAvaible:[],
         pagination: {
@@ -86,6 +94,15 @@ new Vue({
                 this.pizzas=response.data.pizzas.data;
                 this.ingredients = response.data.ingredients;
                 this.pagination=response.data.pagination;
+                this.personalizada={
+                    'id':response.data.personalizado.id,
+                    'name_pizza':response.data.personalizado.name_pizza,
+                    'price':response.data.personalizado.price,
+                    'ingredients': [],
+                    extraIngredients:[],
+                    'img':""
+                },
+                this.carrito=JSON.parse(localStorage.getItem('carrito'))?JSON.parse(localStorage.getItem('carrito')):[];
                 this.pizzasSlice=[this.pizzas.slice(0,3),this.pizzas.slice(3,6)]
             });
         },
@@ -139,12 +156,19 @@ new Vue({
         },
         addCarrito: function(pizza){
             this.carrito = [...this.carrito,pizza];
+
+            toastr.success('Agregado al carrito')
+
         },
         addIngredientesExtras: function(){
               this.carrito=  [...this.carrito,this.fillPizza]
+              toastr.success('Agregado al carrito')
+              this.closeModal()
         },
         deleteCarrito: function(pizza){
             this.carrito= this.carrito.filter( el => el.id != pizza.id)
+            localStorage.setItem("carrito",JSON.stringify(this.carrito))
+
         },
         cleanCarrito: function(){
             this.carrito=[]

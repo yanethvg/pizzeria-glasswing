@@ -12,6 +12,7 @@ class IngredientsSeeder extends Seeder
      */
     public function run()
     {
+
         Ingredient::create(
             [
                 'name_ingredient' => 'Pepperoni',

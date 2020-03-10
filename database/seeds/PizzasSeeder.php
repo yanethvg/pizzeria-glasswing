@@ -14,6 +14,12 @@ class PizzasSeeder extends Seeder
     {
         Pizza::create(
             [
+                'name_pizza' => 'Pizza personalizada',
+                'price' => 4.50
+            ]
+        );
+        Pizza::create(
+            [
                 'name_pizza' => 'Pizza de Jamón',
                 'price' => 5.50
             ]

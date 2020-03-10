@@ -48,4 +48,10 @@ Route::group(['prefix' => 'pedidos'], function () {
 
 Route::get('/confirmacion', function () {
     return view('orders.confirmacion');
-});
+})->middleware('auth');
+
+Route::get('/mispedidos', function () {
+    return view('orders.misPedidos');
+})->middleware('auth');
+
+Route::get('/ordenes',"OrderController@list");

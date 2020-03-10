@@ -1,10 +1,11 @@
 new Vue({
-    el: "#confirmacion",
+    el: "#mispedidos",
     created() {
-        this.getLocalStorage();
+        this.getPedidos();
     },
     data:{
         carrito:[],
+        orders:[]
     },
     filters:{
         toConfirm: function(value){
@@ -21,9 +22,13 @@ new Vue({
     },
 
     methods: {
-        getLocalStorage: function(){
-            let carro = localStorage.getItem('carrito');
-            this.carrito = JSON.parse(carro);
+        getPedidos: function(){
+            let url='/ordenes'
+            axios.get(url).then(response=>{
+                this.orders=response.data;
+
+            })
+
         },
         totalSum:function(extraIngredients, price){
             if(!extraIngredients){
@@ -101,7 +106,3 @@ new Vue({
     }
 
 });
-  // register globally
-
-
-

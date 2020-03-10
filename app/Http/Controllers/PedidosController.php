@@ -14,10 +14,14 @@ class PedidosController extends Controller
     public function list(Request $request){
         $pizzas = Pizza::orderby('id','DESC')
                          ->with('ingredients')
+                         ->where('id',">",1)
                          ->paginate(6);
-         $ingredients = Ingredient::all();
-
-         //dd($pizzas);
+        $ingredients = Ingredient::all();
+        $personalizado = Pizza::orderby('id','DESC')
+                         ->with('ingredients')
+                         ->where('id',1)
+                         ->get()
+                         ->first();
          return [
              'pagination' => [
                  'total'         => $pizzas->total(),
@@ -28,7 +32,8 @@ class PedidosController extends Controller
                  'to'            => $pizzas->lastItem(),
              ],
              'pizzas' => $pizzas,
-             'ingredients' => $ingredients
+             'ingredients' => $ingredients,
+             'personalizado'=>$personalizado
          ];
      }
 
@@ -37,6 +42,7 @@ class PedidosController extends Controller
         //dd($request->all());
         $order = new Order;
         $order->amount = $request->amount;
+        $order->user_id= auth()->user()->id;
         $order->save();
         foreach($request->pizzas as $pizza){
             $orderDetail = new OrderDetails;
@@ -54,4 +60,6 @@ class PedidosController extends Controller
     {
 
     }
+
+
 }

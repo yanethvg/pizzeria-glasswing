@@ -12,10 +12,11 @@ class DetallePizzaSeeder extends Seeder
      */
     public function run()
     {
+
         DetallePizza::create(
             [
                 'ingredient_id' => 9,
-                'pizza_id' => 1
+                'pizza_id' => 2
             ]
         );
         DetallePizza::create(

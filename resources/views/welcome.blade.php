@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Pizzeria Glasswing</title>
     <link rel="stylesheet" type="text/css" href="{{ asset('clientes/css/normalize.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
     <link rel="stylesheet" type="text/css" href="{{ asset('clientes/css/skeleton.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('clientes/css/custom.css') }}">
     <link rel="stylesheet" href="https://unpkg.com/vue-multiselect@2.1.0/dist/vue-multiselect.min.css">
@@ -45,8 +46,8 @@
                                                 </td>
                                         </tbody>
                                     </table>
-                                    <a id="vaciar-carrito" class="button u-full-width" v-on:click.prevent="cleanCarrito">Vaciar Carrito</a>
-                                    <a  class="u-full-width button button-custom-agregar input" data-id="1" v-on:click.prevent="saveStorage">Realizar Pedido</a>
+                                    <a id="vaciar-carrito" class="button u-full-width" v-on:click.prevent="cleanCarrito" >Vaciar Carrito</a>
+                                    <a  class="u-full-width button button-custom-agregar input" data-id="1" v-on:click.prevent="saveStorage" v-if='carrito.length>0'>Realizar Pedido</a>
                             </div>
 
                     </li>
@@ -80,7 +81,7 @@
                                 <h2>¿Qué desea comer?</h2>
                                 @auth
                                 <p style="color:white; margin: 1px">Revisa tus Pedidos</p>
-                                <a href="" class="button button-custom" data-id="1">Mis Pedidos</a>
+                                <a href="/mispedidos" class="button button-custom" data-id="1">Mis Pedidos</a>
                                 @else
                                 <p style="color:white; margin:1px">Para poder realizar pedidos</p>
                                 <a href="{{route('login')}}" class="button button-custom" data-id="1">Ingrese a su cuenta</a>
@@ -124,7 +125,7 @@
                     <div class="info-card">
                         <h4>Personalize su pizza</h4>
                         <p>Precio: <span class="u-pull-right ">$$$</span></p>
-                        <a href="#" class="u-full-width button button-custom-agregar input" data-id="1">Crear Pizza</a>
+                        <a href="#" class="u-full-width button button-custom-agregar input" data-id="1" v-on:click.prevent="showPizza(personalizada)">Crear Pizza</a>
                     </div>
                 </div>
            </div>
@@ -193,8 +194,10 @@
                 <img v-bind:src="fillPizza.img | toTable " class=" u-full-width">
             </div>
             <div class="seven columns">
-                <h4>Ingredientes</h4>
-                <div class="flex-info-ingredient">
+                <h4 v-if='fillPizza.ingredients.length>0'>Ingredientes</h4>
+                <h4 v-else>Personalizar su pizza</h4>
+
+                <div class="flex-info-ingredient" v-if='fillPizza.ingredients.length>0'>
                     <div   v-for='ingredient in fillPizza.ingredients'>
 
                         <img v-bind:src="ingredient.img | toModal" class="rounded-img">
@@ -251,6 +254,7 @@
 
 </div>
     <script src="{{ asset('clientes/js/app.js') }}"></script>
+    <script src="{{ asset('js/jquery-3.3.1.min.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script src="https://unpkg.com/vue-multiselect@2.1.0"></script>
     <script src="https://unpkg.com/axios@0.19.0/dist/axios.min.js"></script>
