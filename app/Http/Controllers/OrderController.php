@@ -21,4 +21,23 @@ class OrderController extends Controller
             'orders' => $orders
         ];
     }
+    public function listAdmin(Request $request){
+        $orders=Order::with('pizzas')->with('users')->paginate(5);
+        //dd($orders);
+        return [
+            'pagination' => [
+                'total'         => $orders->total(),
+                'current_page'  => $orders->currentPage(),
+                'per_page'      => $orders->perPage(),
+                'last_page'     => $orders->lastPage(),
+                'from'          => $orders->firstItem(),
+                'to'            => $orders->lastItem(),
+            ],
+            'orders' => $orders
+        ];
+    }
+    public function index()
+    {
+        return view('orders.admin.index');
+    }
 }

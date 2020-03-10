@@ -54,4 +54,6 @@ Route::get('/mispedidos', function () {
     return view('orders.misPedidos');
 })->middleware('auth');
 
-Route::get('/ordenes',"OrderController@list");
+Route::get('/ordenes',"OrderController@list")->middleware('auth');
+Route::get('/ordenes/list',"OrderController@listAdmin")->name('orders.list')->middleware(['auth','has.role:admin']);
+Route::get('/ordenes/admin', 'OrderController@index')->name('orders.index');

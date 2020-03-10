@@ -56,10 +56,7 @@ class PedidosController extends Controller
         return response()->json(['respuesta'=>'Orden Creada con éxito']);
     }
 
-    public function destroy($id)
-    {
 
-    }
 
 
 }
