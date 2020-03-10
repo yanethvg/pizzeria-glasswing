@@ -56,7 +56,7 @@ class UserSeeder extends Seeder
             'password'   =>  Hash::make('secret')
         ])->roles()->sync(2);
 
-        factory(App\User::class, 10)->create()->each(function($user){
+        factory(App\User::class, 100)->create()->each(function($user){
             $user->roles()->sync(2);
         });
 
