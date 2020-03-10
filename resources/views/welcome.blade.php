@@ -80,6 +80,7 @@
                         <div class="contenido-hero">
                                 <h2>¿Qué desea comer?</h2>
                                 @auth
+                                <h4 style="color:white; margin: 1px"> Bienvenido a su Cuenta {{ Auth::user()->name }}</h4>
                                 <p style="color:white; margin: 1px">Revisa tus Pedidos</p>
                                 <a href="/mispedidos" class="button button-custom" data-id="1">Mis Pedidos</a>
                                 @else
