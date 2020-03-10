@@ -92,7 +92,7 @@ new Vue({
                         setTimeout(()=>{
                             location.href='/'
                         },1000)
-
+                        this.cleanCarrito()
                 })
                 .catch(error => {
                     console.log(error)
