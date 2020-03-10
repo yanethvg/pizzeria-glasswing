@@ -148,6 +148,11 @@ new Vue({
         },
         cleanCarrito: function(){
             this.carrito=[]
+            localStorage.clear();
+        },
+        saveStorage: function(){
+            localStorage.setItem("carrito",JSON.stringify(this.carrito));
+            location.href="/confirmacion";
         }
 
     }

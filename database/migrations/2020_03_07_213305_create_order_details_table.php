@@ -15,10 +15,6 @@ class CreateOrderDetailsTable extends Migration
     {
         Schema::create('order_details', function (Blueprint $table) {
             $table->increments('id');
-            $table->boolean('extra_ingredient');
-            $table->double('subtotal');
-            $table->bigInteger('ingredient_id')->unsigned();
-            $table->foreign('ingredient_id')->references('id')->on('ingredients');
             $table->bigInteger('pizza_id')->unsigned();
             $table->foreign('pizza_id')->references('id')->on('pizzas');
             $table->bigInteger('order_id')->unsigned();

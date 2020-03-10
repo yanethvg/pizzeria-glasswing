@@ -6,6 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Order extends Model
 {
-    public $timestamps = false;
-    protected $fillable=['quantity','amount'];
+    protected $fillable=['amount'];
+
 }

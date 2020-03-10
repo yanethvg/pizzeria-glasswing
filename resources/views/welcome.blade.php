@@ -46,6 +46,7 @@
                                         </tbody>
                                     </table>
                                     <a id="vaciar-carrito" class="button u-full-width" v-on:click.prevent="cleanCarrito">Vaciar Carrito</a>
+                                    <a  class="u-full-width button button-custom-agregar input" data-id="1" v-on:click.prevent="saveStorage">Realizar Pedido</a>
                             </div>
 
                     </li>

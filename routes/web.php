@@ -42,5 +42,10 @@ Route::group(['middleware'=>'auth','prefix' => 'pizzas'], function () {
 
 Route::group(['prefix' => 'pedidos'], function () {
     Route::get('/list','PedidosController@list')->name('pedidos.list');
+    Route::post('/', 'PedidosController@store')->name('pedidos.store');
 });
 
+
+Route::get('/confirmacion', function () {
+    return view('orders.confirmacion');
+});

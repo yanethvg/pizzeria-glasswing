@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Ingredient;
+use App\Order;
+use App\OrderDetails;
 use App\Pizza;
 use Illuminate\Http\Request;
 
@@ -32,27 +34,21 @@ class PedidosController extends Controller
 
     public function store(Request $request)
     {
+        //dd($request->all());
+        $order = new Order;
+        $order->amount = $request->amount;
+        $order->save();
+        foreach($request->pizzas as $pizza){
+            $orderDetail = new OrderDetails;
+            $orderDetail->order_id = $order->id;
+            $orderDetail->pizza_id = $pizza['id'];
+            $orderDetail->save();
+            if($pizza['ingredientesExtras'])
+                $orderDetail->ingredients()->sync($pizza['ingredientesExtras']);
 
+        }
+        return response()->json(['respuesta'=>'Orden Creada con éxito']);
     }
-
-
-    public function show($id)
-    {
-
-    }
-
-
-    public function edit($id)
-    {
-
-    }
-
-
-    public function update(Request $request, $id)
-    {
-
-    }
-
 
     public function destroy($id)
     {
