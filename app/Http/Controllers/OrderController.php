@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 class OrderController extends Controller
 {
     public function list(Request $request){
-        $orders=Order::where('user_id',auth()->user()->id)->with('pizzas')->paginate(3);
+        $orders=Order::where('user_id',auth()->user()->id)->with('pizzas')->orderby('id','DESC')->paginate(3);
         return [
             'pagination' => [
                 'total'         => $orders->total(),
@@ -22,7 +22,7 @@ class OrderController extends Controller
         ];
     }
     public function listAdmin(Request $request){
-        $orders=Order::with('pizzas')->with('users')->paginate(5);
+        $orders=Order::with('pizzas')->with('users')->orderby('id','DESC')->paginate(5);
         //dd($orders);
         return [
             'pagination' => [
