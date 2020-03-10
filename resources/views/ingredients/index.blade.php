@@ -19,7 +19,7 @@ Listado de Ingredientes
             <div class="d-flex mb-2">
                 <div class="float-right ml-auto">
                     <a class="btn btn-outline-success"  v-on:click.prevent="showCreate" href=""><i
-                            class="fa fa-user-plus icon-expe"></i>Registrar</a>
+                            class="fa fa-plus icon-expe"></i>Registrar</a>
                 </div>
             </div>
             <div class="table-responsive" >

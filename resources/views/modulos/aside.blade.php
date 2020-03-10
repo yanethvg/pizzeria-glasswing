@@ -17,5 +17,5 @@
     <span class="app-menu__label">Ingredientes</span></a></li>
 <li><a class="app-menu__item {{isActive('ordenes/ordenes')}}" href="{{route('orders.index')}}">
     <img src="{{ asset('images/app.svg') }}" alt="" width="25px"> &nbsp;
-    <span class="app-menu__label">Ingredientes</span></a></li>
+    <span class="app-menu__label">Ordenes</span></a></li>
 </ul>
