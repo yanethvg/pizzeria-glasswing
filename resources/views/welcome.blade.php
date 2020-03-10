@@ -4,10 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Carrito</title>
+    <title>Pizzeria Glasswing</title>
     <link rel="stylesheet" type="text/css" href="{{ asset('clientes/css/normalize.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('clientes/css/skeleton.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('clientes/css/custom.css') }}">
+    <link rel="stylesheet" href="https://unpkg.com/vue-multiselect@2.1.0/dist/vue-multiselect.min.css">
+
 </head>
 <body  >
     <div id="pizzas" v-cloak class="container-fluid">
@@ -129,7 +131,7 @@
                         <h4>@{{ pizza.name_pizza}}</h4>
                         <p>Precio: <span class="u-pull-right ">$ @{{ pizza.price }}</span></p>
                         <a href="#" class="u-full-width button button-custom input agregar-carrito" data-id="1">Agregar Al Carrito</a>
-                        <a href="#" class="u-full-width button button-custom-agregar input" data-id="1">Agregar Ingredientes</a>
+                        <a href="#" class="u-full-width button button-custom-agregar input" data-id="1" v-on:click.prevent="showPizza(pizza)">Agregar Ingredientes</a>
                     </div>
                 </div> <!--.card-->
            </div>
@@ -162,6 +164,76 @@
         </div>
     </div>
     <div class="one-third column">&nbsp;</div>
+<!-- Trigger/Open The Modal -->
+
+
+<!-- The Modal -->
+<div id="myModal" class="modal">
+
+  <!-- Modal content -->
+  <div class="modal-content container">
+    <div class="modal-header">
+        <h2>@{{fillPizza.name_pizza}}</h2>
+
+    </div>
+    <div class="modal-body ">
+    <div>
+        <div class="row">
+            <div class="five columns">
+                <img v-bind:src="fillPizza.img | toTable " class=" u-full-width">
+            </div>
+            <div class="seven columns">
+                <h4>Ingredientes</h4>
+                <div class="flex-info-ingredient">
+                    <div   v-for='ingredient in fillPizza.ingredients'>
+
+                        <img v-bind:src="ingredient.img | toModal" class="rounded-img">
+
+                        <p>@{{ingredient.name_ingredient}}</p>
+                    </div>
+
+                </div>
+                <h4 v-if="extraIngredients.length>0">Ingredientes Extra Agregados</h4>
+                <div class="flex-info-ingredient">
+                    <div v-for="extra in extraIngredients">
+                        <img v-bind:src="extra.img | toModal" class="rounded-img">
+                    <p>@{{extra.name_ingredient}} $@{{extra.price}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="five columns">
+                <h4>@{{ totalSum(extraIngredients,fillPizza.price) }}</h4>
+                <h4 style="text-align: center; position:relative; top:0.7em">Agregar ingredientes: </h4>
+            </div>
+
+            <div class="seven columns">
+                <multiselect
+                :custom-label="customLabel"
+                :class="[ errors.ingredients ? 'is-invalid' : '']"
+                v-model="extraIngredients"
+                :options="extraIngredientsAvaible"
+                track-by="name_ingredient" label="name_ingredient"
+                :multiple="true">
+
+                </multiselect>
+            </div>
+        </div>
+
+    </div>
+
+    </div>
+    <div class="modal-footer">
+        <a href="#" class=" button button-custom input agregar-carrito" data-id="1">Agregar Al Carrito</a>
+        <a href="#" class=" button button-custom-agregar input" data-id="1" v-on:click.prevent="closeModal">Cerrar</a>
+
+    </div>
+  </div>
+
+</div>
+
+
 
    </div>
    </div>
@@ -170,8 +242,10 @@
 </div>
     <script src="{{ asset('clientes/js/app.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/vue-multiselect@2.1.0"></script>
     <script src="https://unpkg.com/axios@0.19.0/dist/axios.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     <script src="{{ asset('js/custom/pedidos/order.js') }}"></script>
+
 </body>
 </html>

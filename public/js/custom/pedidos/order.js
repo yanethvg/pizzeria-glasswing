@@ -1,5 +1,6 @@
 new Vue({
     el: "#pizzas",
+    components:{ Multiselect:window.VueMultiselect.default},
     created() {
         this.getPizzas();
     },
@@ -7,6 +8,9 @@ new Vue({
         pizzas:[],
         pizzasSlice:[],
         ingredients:[],
+        total:null,
+        extraIngredientsAvaible:[],
+        extraIngredients:[],
         pagination: {
             'total': 0,
             'current_page': 0,
@@ -14,6 +18,13 @@ new Vue({
             'last_page': 0,
             'from': 0,
             'to': 0
+        },
+        fillPizza:{
+            'id':"",
+            'name_pizza':"",
+            'price':"",
+            'ingredients': [],
+            'img':""
         },
         errors:{},
         offset:2,
@@ -23,6 +34,11 @@ new Vue({
             if(!value)
                 return 'https://res.cloudinary.com/dgi2nmgsy/image/upload/w_468,h_351,c_scale/v1583767799/2747815cc4a7c1258da3f330d71bef8d_bvvree.jpg'
             return value.toString().replace('upload/','upload/w_468,h_351,c_scale/')
+        },
+        toModal: function(value){
+            if(!value)
+                return 'https://res.cloudinary.com/dgi2nmgsy/image/upload/w_60,h_60,c_scale/v1583768036/d43c12cc0053b2636250ba55d5c9d805_th9kkn.jpg'
+            return value.toString().replace('upload/','upload/w_60,h_60,c_scale/')
         }
     },
 
@@ -55,6 +71,9 @@ new Vue({
 
     },
     methods: {
+        customLabel ({name_ingredient,price}){
+            return `${name_ingredient} - $ ${price}`
+        },
         getPizzas: function(page){
             let url="/pedidos/list?page="+this.pagination.current_page;
             axios.get(url).then(response=> {
@@ -69,17 +88,45 @@ new Vue({
 			this.getPizzas(page);
         },
         showPizza: function(pizza){
+            this.extraIngredients = [];
             this.fillPizza={
                 'id':pizza.id,
                 'name_pizza':pizza.name_pizza,
                 'price':pizza.price,
                 'ingredients': pizza.ingredients,
-                'file':pizza.img
+                'img':pizza.img
             }
-            this.image = pizza.img;
-            this.errors={};
+            ingredientes=this.ingredients;
+            pizzaIngredients=this.fillPizza.ingredients;
+            ingredientes.forEach(ingredient=>{
+                isExtra=true;
+                pizzaIngredients.forEach(pingredient=>{
+                    if(ingredient.id==pingredient.id){
+                        isExtra=false;
+                    }
+                })
+                if(isExtra)
+                    this.extraIngredientsAvaible.push(ingredient)
+            })
 
-          $("#edit").modal('show');
+            this.errors={};
+            let modal = document.getElementById("myModal");
+            modal.style.display = "block";
+
+        },
+        closeModal: function(){
+            let modal = document.getElementById("myModal");
+            modal.style.display = "none";
+        },
+        totalSum:function(extraIngredients, price){
+
+            let sum =extraIngredients.reduce((acu,val)=>{
+                price_ingredient= parseFloat(val.price);
+                return acu+parseFloat(price_ingredient)
+
+            } ,0);
+            sum+=parseFloat(price);
+            return sum;
         }
 
     }
