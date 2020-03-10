@@ -12,7 +12,7 @@
 
 </head>
 <body  >
-    <div id="pizzas" v-cloak class="container-fluid">
+<div id="pizzas" v-cloak class="container-fluid">
 <header id="header" class="header">
     <div class="container">
         <div class="row">
@@ -34,9 +34,18 @@
                                                 <th></th>
                                             </tr>
                                         </thead>
-                                        <tbody></tbody>
+                                        <tbody v-for="car in carrito">
+                                                <td >
+                                                   <img v-bind:src="car['img'] | toCard"  >
+                                                </td>
+                                                <td> @{{ car['name_pizza'] }} </td>
+                                                <td> @{{ totalSum(car.extraIngredients,car.price) }} </td>
+                                                <td>
+                                                    <a class="borrar-curso"  v-on:click.prevent="deleteCarrito(car)"> X </a>
+                                                </td>
+                                        </tbody>
                                     </table>
-                                    <a href="#" id="vaciar-carrito" class="button u-full-width">Vaciar Carrito</a>
+                                    <a id="vaciar-carrito" class="button u-full-width" v-on:click.prevent="cleanCarrito">Vaciar Carrito</a>
                             </div>
 
                     </li>
@@ -130,8 +139,8 @@
                     <div class="info-card">
                         <h4>@{{ pizza.name_pizza}}</h4>
                         <p>Precio: <span class="u-pull-right ">$ @{{ pizza.price }}</span></p>
-                        <a href="#" class="u-full-width button button-custom input agregar-carrito" data-id="1">Agregar Al Carrito</a>
-                        <a href="#" class="u-full-width button button-custom-agregar input" data-id="1" v-on:click.prevent="showPizza(pizza)">Agregar Ingredientes</a>
+                        <a class="u-full-width button button-custom input agregar-carrito"  v-on:click.prevent="addCarrito(pizza)"  data-id="1">Agregar Al Carrito</a>
+                        <a  class="u-full-width button button-custom-agregar input" data-id="1" v-on:click.prevent="showPizza(pizza)">Agregar Ingredientes</a>
                     </div>
                 </div> <!--.card-->
            </div>
@@ -193,9 +202,9 @@
                     </div>
 
                 </div>
-                <h4 v-if="extraIngredients.length>0">Ingredientes Extra Agregados</h4>
+                <h4 v-if="fillPizza.extraIngredients.length>0">Ingredientes Extra Agregados</h4>
                 <div class="flex-info-ingredient">
-                    <div v-for="extra in extraIngredients">
+                    <div v-for="extra in fillPizza.extraIngredients">
                         <img v-bind:src="extra.img | toModal" class="rounded-img">
                     <p>@{{extra.name_ingredient}} $@{{extra.price}}</p>
                     </div>
@@ -204,7 +213,7 @@
         </div>
         <div class="row">
             <div class="five columns">
-                <h4>@{{ totalSum(extraIngredients,fillPizza.price) }}</h4>
+                <h4>$ @{{ totalSum(fillPizza.extraIngredients,fillPizza.price) }}</h4>
                 <h4 style="text-align: center; position:relative; top:0.7em">Agregar ingredientes: </h4>
             </div>
 
@@ -212,7 +221,7 @@
                 <multiselect
                 :custom-label="customLabel"
                 :class="[ errors.ingredients ? 'is-invalid' : '']"
-                v-model="extraIngredients"
+                v-model="fillPizza.extraIngredients"
                 :options="extraIngredientsAvaible"
                 track-by="name_ingredient" label="name_ingredient"
                 :multiple="true">
@@ -225,8 +234,8 @@
 
     </div>
     <div class="modal-footer">
-        <a href="#" class=" button button-custom input agregar-carrito" data-id="1">Agregar Al Carrito</a>
-        <a href="#" class=" button button-custom-agregar input" data-id="1" v-on:click.prevent="closeModal">Cerrar</a>
+        <a href="#" class=" button button-custom input agregar-carrito" data-id="1" v-on:click.prevent="addIngredientesExtras" >Agregar Al Carrito</a>
+        <a class=" button button-custom-agregar input" data-id="1" v-on:click.prevent="closeModal">Cerrar</a>
 
     </div>
   </div>
