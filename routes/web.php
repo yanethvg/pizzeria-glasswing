@@ -17,10 +17,10 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home', 'HomeController@index')->name('home')->middleware('verificacion');
 
 //Ingredientes
-Route::group(['middleware'=>'auth','prefix' => 'ingredients'], function () {
+Route::group(['middleware'=>'auth','prefix' => 'ingredients','middleware'=>'has.role:admin'], function () {
     Route::get('/', 'IngredientController@index')->name('ingredients.index');
     Route::get('/list','IngredientController@list')->name('ingredients.list');
     Route::get('/create', 'IngredientController@create')->name('ingredients.create');
@@ -30,7 +30,7 @@ Route::group(['middleware'=>'auth','prefix' => 'ingredients'], function () {
     Route::get('/{id}','IngredientController@show')->name('ingredients.show');
 });
 
-Route::group(['middleware'=>'auth','prefix' => 'pizzas'], function () {
+Route::group(['middleware'=>'auth','prefix' => 'pizzas','middleware'=>'has.role:admin'], function () {
     Route::get('/', 'PizzaController@index')->name('pizzas.index');
     Route::get('/list','PizzaController@list')->name('pizzas.list');
     Route::get('/create', 'PizzaController@create')->name('pizzas.create');
