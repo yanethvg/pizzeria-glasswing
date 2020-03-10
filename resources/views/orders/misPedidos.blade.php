@@ -143,9 +143,40 @@
                 </tbody>
 
               </table>
-              <a href="/" id="vaciar-carrito" class="button u-full-width" >Regresar</a>
-        </div>
 
+        </div>
+        <div class="container" style="margin-top:15px">
+            <div class="row">
+             <div class="one-third column">&nbsp;</div>
+                 <div class="one-third column">
+                     <ul class="pagination">
+                             <li v-if="pagination.current_page > 1" >
+                                 <a  href="#" @click.prevent="changePage(pagination.current_page - 1)">
+                                     Atras
+                                 </a>
+                             </li>
+
+                             <li class='page-item' v-for="page in pagesNumber">
+                                 <a  href="#" @click.prevent="changePage(page)"  v-bind:class="[ page == isActived ? 'active' : '']">
+                                     @{{ page }}
+                                 </a>
+                             </li>
+
+                             <li v-if="pagination.current_page < pagination.last_page">
+                                 <a  href="#" @click.prevent="changePage(pagination.current_page + 1)">
+                                     Siguiente
+                                 </a>
+                             </li>
+
+                       </ul>
+                 </div>
+             </div>
+             <div class="one-third column">&nbsp;</div>
+            </div>
+
+            <div class="container">
+                <a href="/" id="vaciar-carrito" class="button u-full-width" >Regresar</a>
+            </div>
  </div>
 
 
