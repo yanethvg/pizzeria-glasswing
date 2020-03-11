@@ -29,8 +29,10 @@ Route::group(['middleware'=>'auth','prefix' => 'ingredients','middleware'=>'has.
     Route::put('/update/{id}','IngredientController@update')->name('ingredients.update');
     Route::get('/{id}','IngredientController@show')->name('ingredients.show');
     Route::post('/file','IngredientController@import')->name('import.ingredients');
-    Route::get('/download','IngredientController@export')->name('export.ingredients');
+
 });
+Route::get('/exportIngrediente','IngredientController@export')->name('export.ingredients')->middleware(['auth','has.role:admin']);
+Route::get('/exportPizza','PizzaController@export')->name('export.pizzas')->middleware(['auth','has.role:admin']);
 
 Route::group(['middleware'=>'auth','prefix' => 'pizzas','middleware'=>'has.role:admin'], function () {
     Route::get('/', 'PizzaController@index')->name('pizzas.index');

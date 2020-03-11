@@ -20,6 +20,8 @@ Listado de Pizzas
                 <div class="float-right ml-auto">
                     <a class="btn btn-outline-success"  v-on:click.prevent="showCreate" href=""><i
                             class="fa fa-plus icon-expe"></i>Registrar</a>
+                    <a class="btn btn-outline-info"  href="{{route('export.pizzas')}}" >
+                                <i class="fa fa-file-excel-o" aria-hidden="true"></i> Exportar Excel</a>
                 </div>
             </div>
             <div class="table-responsive" >

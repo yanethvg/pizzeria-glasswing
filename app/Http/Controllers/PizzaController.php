@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\DetallePizza;
+use App\Exports\PizzasExport;
 use App\Http\Requests\PizzaRequest;
 use App\Ingredient;
 use App\Pizza;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 
 class PizzaController extends Controller
 {
@@ -132,8 +134,9 @@ class PizzaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
-        //
+    public function export(){
+        $excel=Excel::download(new PizzasExport,'pizzas.xlsx');
+
+        return $excel;
     }
 }

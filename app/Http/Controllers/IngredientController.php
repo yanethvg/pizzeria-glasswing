@@ -143,7 +143,9 @@ class IngredientController extends Controller
         return back();
     }
 
-    public function export(Request $request){
-        return Excel::download(new IngredientsExport,'ingredientes.xlsx');
+    public function export(){
+        $excel=Excel::download(new IngredientsExport,'ingredientes.xlsx');
+
+        return $excel;
     }
 }
