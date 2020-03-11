@@ -115,6 +115,30 @@ class DetallePizzaSeeder extends Seeder
                 'pizza_id' => 6
             ]
         );
+        DetallePizza::create(
+            [
+                'ingredient_id' => 5,
+                'pizza_id' => 8
+            ]
+        );
+        DetallePizza::create(
+            [
+                'ingredient_id' => 4,
+                'pizza_id' => 8
+            ]
+        );
+        DetallePizza::create(
+            [
+                'ingredient_id' => 1,
+                'pizza_id' => 8
+            ]
+        );
+        DetallePizza::create(
+            [
+                'ingredient_id' => 5,
+                'pizza_id' => 7
+            ]
+        );
 
     }
 }
