@@ -48,6 +48,7 @@ Route::group(['middleware'=>'auth','prefix' => 'consultas','middleware'=>'has.ro
     Route::get('/queryIngredients', 'QueryController@ingredientesPopulares')->name('query.ingredientsPopulares');
 });
 
+Route::get('/sucursales', 'SucursalController@index')->name('sucursales.index')->middleware('auth');
 
 Route::group(['prefix' => 'pedidos'], function () {
     Route::get('/list','PedidosController@list')->name('pedidos.list');
