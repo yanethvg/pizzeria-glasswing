@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\IngredientsExport;
 use App\Http\Requests\IngredientRequest;
+use App\Imports\IngredientsImport;
 use App\Ingredient;
 use Illuminate\Http\Request;
 use JD\Cloudder\Facades\Cloudder;
+use Maatwebsite\Excel\Facades\Excel;
 
 class IngredientController extends Controller
 {
@@ -134,8 +137,13 @@ class IngredientController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
-        //
+    public function import(Request $request){
+        $file=$request->file('file');
+        Excel::import(new IngredientsImport,$file);
+        return back();
+    }
+
+    public function export(Request $request){
+        return Excel::download(new IngredientsExport,'ingredientes.xlsx');
     }
 }

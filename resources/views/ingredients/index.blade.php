@@ -20,8 +20,20 @@ Listado de Ingredientes
                 <div class="float-right ml-auto">
                     <a class="btn btn-outline-success"  v-on:click.prevent="showCreate" href=""><i
                             class="fa fa-plus icon-expe"></i>Registrar</a>
+                    <a class="btn btn-outline-info"  href="{{route('export.ingredients')}}" > baja Excel</a>
+
                 </div>
             </div>
+            {{-- <div class="col-md-5">
+                <form action="{{route('import.ingredients')}}" method="POST" enctype="multipart/form-data">
+                @csrf
+                <div class="form-group">
+                    <input name="file" class="form-control-file" id="exampleInputFile" type="file" aria-describedby="fileHelp">
+                    <input type="submit">
+                </div>
+                </form>
+            </div> --}}
+
             <div class="table-responsive" >
                 <table class="table text-center">
                     <thead>
