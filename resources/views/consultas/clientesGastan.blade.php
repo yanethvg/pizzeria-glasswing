@@ -29,7 +29,7 @@ Clientes Frecuentes que mas Gastan
                         @foreach($orders as $order)
                         <tr>
                             <td>{{ $order->users->name }}</td>
-                            <td>$ {{ $order->total}}</td>
+                            <td>$ {{ number_format($order->total,2) }}</td>
                             <td>{{ $order->cantidad}}</td>
                         </tr>
                         @endforeach

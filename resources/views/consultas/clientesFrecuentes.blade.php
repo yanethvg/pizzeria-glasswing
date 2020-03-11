@@ -30,7 +30,7 @@ Clientes Frecuentes
                         <tr>
                             <td>{{ $order->users->name }}</td>
                             <td>{{ $order->cantidad}}</td>
-                            <td>$ {{ $order->total}}</td>
+                            <td>$ {{ number_format($order->total,2)}}</td>
                         </tr>
                         @endforeach
                     </tbody>
