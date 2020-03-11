@@ -5,10 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Pizzeria Glasswing</title>
-    <link rel="stylesheet" type="text/css" href="{{ asset('clientes/css/normalize.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ secure_asset('clientes/css/normalize.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
-    <link rel="stylesheet" type="text/css" href="{{ asset('clientes/css/skeleton.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('clientes/css/custom.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ secure_asset('clientes/css/skeleton.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ secure_asset('clientes/css/custom.css') }}">
     <link rel="stylesheet" href="https://unpkg.com/vue-multiselect@2.1.0/dist/vue-multiselect.min.css">
 
 </head>
@@ -23,7 +23,7 @@
             <div class="one columns u-pull-right ">
                 <ul>
                     <li class="submenu">
-                        <img src="{{ asset('clientes/img/cart.png') }}" id="img-carrito">
+                        <img src="{{ secure_asset('clientes/img/cart.png') }}" id="img-carrito">
 
                             <div id="carrito">
                                     <table id="lista-carrito" class="u-full-width">
@@ -58,7 +58,7 @@
                 <ul>
                     <li >
                         <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                            <img src="{{ asset('clientes/img/exit.png') }}" >
+                            <img src="{{ secure_asset('clientes/img/exit.png') }}" >
                         </a>
                         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                             @csrf
@@ -254,13 +254,13 @@
 
 
 </div>
-    <script src="{{ asset('clientes/js/app.js') }}"></script>
-    <script src="{{ asset('js/jquery-3.3.1.min.js') }}"></script>
+    <script src="{{ secure_asset('clientes/js/app.js') }}"></script>
+    <script src="{{ secure_asset('js/jquery-3.3.1.min.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script src="https://unpkg.com/vue-multiselect@2.1.0"></script>
     <script src="https://unpkg.com/axios@0.19.0/dist/axios.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
-    <script src="{{ asset('js/custom/pedidos/order.js') }}"></script>
+    <script src="{{ secure_asset('js/custom/pedidos/order.js') }}"></script>
 
 </body>
 </html>

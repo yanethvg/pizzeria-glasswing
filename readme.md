@@ -80,4 +80,11 @@ ejecutar el siguente comando.
     php artisan migrate:refresh --seed
 
 ```
-![alt text](https://res.cloudinary.com/dgi2nmgsy/image/upload/v1583887181/FireShot_Capture_099_-_Listado_de_Pizzas_-_localhost_jbii9c.png) 
+### Vista de Administración
+Panel de Administración con opciones de Consultas Rápidas y realización de Gestión de Pizzas e Ingredientes
+![alt text](https://res.cloudinary.com/dgi2nmgsy/image/upload/v1583887524/admin_j8opyh.jpg)
+
+### Landing Page
+Pagina Principal para realizar pedidos de Pizzas
+![alt text](https://github.com/yaneth94/pizzeria-glasswing/blob/master/public/images/General.png)
+
