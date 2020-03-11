@@ -18,5 +18,6 @@ class DatabaseSeeder extends Seeder
         $this->call(PizzasSeeder::class);
         $this->call(DetallePizzaSeeder::class);
         $this->call(OrdenSeeder::class);
+        $this->call(SucursalSeeder::class);
     }
 }

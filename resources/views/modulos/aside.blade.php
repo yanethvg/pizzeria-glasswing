@@ -27,4 +27,7 @@
 <li><a class="app-menu__item {{isActive('consultas/queryIngredients')}}" href="{{route('query.ingredientsPopulares')}}">
         <img src="{{ asset('images/hand.svg') }}" alt="" width="25px"> &nbsp;
         <span class="app-menu__label">Ingredientes Populares</span></a></li>
+<li><a class="app-menu__item {{isActive('sucursales')}}" href="{{route('sucursales.index')}}">
+            <img src="{{ asset('images/equipo.svg') }}" alt="" width="25px"> &nbsp;
+            <span class="app-menu__label">Sucursales</span></a></li>
 </ul>
