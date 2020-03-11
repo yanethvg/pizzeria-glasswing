@@ -122,6 +122,7 @@
             <table class="u-full-width">
                 <thead>
                   <tr>
+                    <th>Codigo</th>
                     <th>Fecha de orden</th>
                     <th>Monto</th>
                     <th>Pizzas de la orden</th>
@@ -129,6 +130,7 @@
                 </thead>
                 <tbody>
                   <tr v-for="order in orders">
+                    <td>@{{ order.id }}</td>
                     <td>@{{ order.created_at }}</td>
                     <td>@{{order.amount}}</td>
                     <td>

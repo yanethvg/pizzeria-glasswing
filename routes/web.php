@@ -40,6 +40,13 @@ Route::group(['middleware'=>'auth','prefix' => 'pizzas','middleware'=>'has.role:
     Route::get('/{id}','PizzaController@show')->name('pizzas.show');
 });
 
+Route::group(['middleware'=>'auth','prefix' => 'consultas','middleware'=>'has.role:admin'], function () {
+    Route::get('/queryFrecuents', 'QueryController@clientesFrecuentes')->name('query.clientsFrecuent');
+    Route::get('/querySpend', 'QueryController@clientesGastan')->name('query.clientspend');
+    Route::get('/queryIngredients', 'QueryController@ingredientesPopulares')->name('query.ingredientsPopulares');
+});
+
+
 Route::group(['prefix' => 'pedidos'], function () {
     Route::get('/list','PedidosController@list')->name('pedidos.list');
     Route::post('/', 'PedidosController@store')->name('pedidos.store');
